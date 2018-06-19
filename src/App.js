@@ -77,11 +77,11 @@ class App extends Component {
                             </div>
                             
                             {/* Sort */}                            
-                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                 <div className="dropdown">
                                     <button 
                                         type="button" 
-                                        class="btn btn-primary dropdown-toggle"
+                                        className="btn btn-primary dropdown-toggle"
                                         data-toggle="dropdown"
                                         aria-haspopup="true"
                                         aria-expanded="true">
