@@ -5,7 +5,63 @@ import Controler from './components/Controler';
 import TaskList from './components/TaskList';
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            tasks: [] //id(duy nhat), name, status
+        }
+    }
+    
+    randomizeChar() {
+        return (
+            Math.floor((1+Math.random()) * 0x10000).toString(16).substring(1)
+        );
+    }
+
+    generateID() {
+        return (
+            this.randomizeChar() + '-' + this.randomizeChar() + '-' + this.randomizeChar() + '-' + this.randomizeChar()
+        );
+    }
+
+    onGenerateData = () => {
+        var tasks = [
+            {
+                id: this.generateID(),
+                name: 'Viết CV',
+                status: true
+            },
+            {
+                id: this.generateID(),
+                name: 'Đăng ký học',
+                status: true
+            },
+            {
+                id: this.generateID(),
+                name: 'Về quê',
+                status: false
+            },
+        ]
+        this.setState({
+            tasks: tasks
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    
+    componentWillMount() {
+        if (localStorage && localStorage.getItem('tasks')) {
+            var tasks = JSON.parse(localStorage.getItem('tasks'));
+            this.setState({
+                tasks: tasks
+            })
+        }
+    }
+    
+
     render() {
+        var {tasks} = this.state; // var tasks = this.state.tasks
+
         return (            
             <div className="container">
                 <div className="text-center">
@@ -30,6 +86,15 @@ class App extends Component {
                             Thêm công việc
                         </button>
 
+                        {/* temporary button */}
+                        <button 
+                            type="button" 
+                            className="btn btn-danger ml-5"
+                            onClick={this.onGenerateData}>
+                            <span className="fa fa-plus mr-5"></span>
+                            Generate Data
+                        </button>
+
                         {/* Search & sort */}
                         <Controler />
 
@@ -37,7 +102,7 @@ class App extends Component {
                         <div className="row">
                             <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div className="table-responsive">
-                                    <TaskList />
+                                    <TaskList tasks={tasks}/>
                                 </div>
                             </div>
                         </div>
