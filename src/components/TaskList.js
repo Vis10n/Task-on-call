@@ -31,8 +31,8 @@ class TaskList extends Component {
                         <td>
                             <select className="form-control">
                                 <option value="-1">Tất Cả</option>
-                                <option value="0">Ẩn</option>
-                                <option value="1">Kích Hoạt</option>
+                                <option value="0">Chưa xong</option>
+                                <option value="1">Xong</option>
                             </select>
                         </td>
                         <td></td>
